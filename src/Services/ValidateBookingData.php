@@ -11,8 +11,8 @@ class ValidateBookingData {
     
         // Проверка адреса
         if (!isset($data['address']) || 
-            strlen(trim($data['address'])) < 10 || 
-            strlen(trim($data['address'])) > 200) {
+            mb_strlen(trim($data['address'])) < 10 || // <-- ИСПРАВЛЕНО ЗДЕСЬ
+    mb_strlen(trim($data['address'])) > 200) { // <-- ИСПРАВЛЕНО ЗДЕСЬ
             $_SESSION['flash'] = "Поле адреса должно быть более 10 символов (но не более 200).";
             return false;
         }
