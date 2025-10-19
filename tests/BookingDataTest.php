@@ -28,7 +28,7 @@ class BookingDataTest extends TestCase
     // Тест: Все данные валидны
     public function testValidateBookingDataWithValidData(): void
     {
-        $this->assertFalse(ValidateBookingData::validate($this->validData));
+        $this->assertTrue(ValidateBookingData::validate($this->validData));
         $this->assertFalse(isset($_SESSION['flash']));
     }
 

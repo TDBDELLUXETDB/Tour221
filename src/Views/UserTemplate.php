@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Views;
 
 use App\Config\Config;
@@ -6,96 +7,93 @@ use App\Views\BaseTemplate;
 
 class UserTemplate extends BaseTemplate
 {
-    /*
-        Формирование страницы "Регистрация"
-    */
-    public static function getUserTemplate(): string {
+    /**
+     * Формирование страницы "Вход"
+     */
+    public static function getUserTemplate(): string
+    {
         $template = parent::getTemplate();
         $title = 'Вход - Travel Dream';
+
         $content = <<<HTML
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        
+
         .login-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--glass-bg);
             backdrop-filter: blur(15px);
-            bBooking-radius: 25px;
+            border-radius: 25px;
             padding: 2.5rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            bBooking: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--glass-border);
             margin: 1rem auto;
             max-width: 450px;
         }
-        
+
         .login-header {
             text-align: center;
             margin-bottom: 2rem;
         }
-        
+
         .login-header h3 {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #d09db0, #667eea);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.5rem;
         }
-        
+
         .login-header p {
             color: #666;
             font-size: 0.95rem;
         }
-        
+
         .form-input-group {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
-            bBooking: 2px solid rgba(102,126,234,0.1);
-            bBooking-radius: 15px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
             padding: 0.5rem;
             margin-bottom: 1.25rem;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
         }
-        
+
         .form-input-group:focus-within {
-            bBooking-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.15);
+            border-color: var(--main-blue);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
             transform: translateY(-2px);
         }
-        
+
         .form-input-group .input-icon {
             padding: 0 1rem;
-            color: #667eea;
+            color: var(--main-blue);
             font-size: 1.1rem;
             min-width: 50px;
             text-align: center;
         }
-        
+
         .form-input-group .form-control {
-            bBooking: none;
+            border: none;
             background: transparent;
             padding: 0.75rem 0;
             font-size: 1rem;
-            color: #333;
+            color: var(--main-text);
         }
-        
-        .form-input-group .form-control:focus {
-            box-shadow: none;
-            background: transparent;
-        }
-        
+
         .form-input-group .form-control::placeholder {
             color: #999;
         }
-        
+
         .btn-login {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            bBooking: none;
+            background: var(--primary-gradient);
+            border: none;
             color: white;
             padding: 0.875rem 2rem;
-            bBooking-radius: 50px;
+            border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
@@ -104,7 +102,7 @@ class UserTemplate extends BaseTemplate
             width: 100%;
             margin-top: 0.5rem;
         }
-        
+
         .btn-login::before {
             content: '';
             position: absolute;
@@ -112,42 +110,43 @@ class UserTemplate extends BaseTemplate
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s;
         }
-        
+
         .btn-login:hover::before {
             left: 100%;
         }
-        
+
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
-        
+
         .register-link {
             text-align: center;
             margin-top: 1.5rem;
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         .register-link a {
-            color: #667eea;
+            color: var(--main-blue);
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
         }
-        
+
         .register-link a:hover {
             color: #764ba2;
             text-decoration: underline;
         }
-        
+
+        /* Анимация */
         .fade-in-up {
             animation: fadeInUp 0.6s ease;
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -157,14 +156,6 @@ class UserTemplate extends BaseTemplate
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        /* Компактные отступы для страницы входа */
-        .login-wrapper {
-            padding: 1rem 0;
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
         }
         </style>
 
@@ -191,13 +182,14 @@ HTML;
         </div>
 HTML;
 
-        $resultTemplate = sprintf($template, $title, $content);
-        return $resultTemplate;
+        return sprintf($template, $title, $content);
     }
 
-    /* Форма входа (логин, пароль)
-    */
-    public static function getFormLogin(): string {
+    /**
+     * Форма входа (логин, пароль)
+     */
+    public static function getFormLogin(): string
+    {
         $html = <<<FORMA
                 <form action="/login" method="POST" class="fade-in-up">
                     <div class="form-input-group">
@@ -225,73 +217,74 @@ FORMA;
     /**
      * Форма редактирования профиля
      */
-    public static function getProfileForm(array $userData = []): string {
+    public static function getProfileForm(array $userData = []): string
+    {
         $template = parent::getTemplate();
         $title = 'Профиль - Travel Dream';
-    
+
         $username = htmlspecialchars($userData['username'] ?? '');
         $email = htmlspecialchars($userData['email'] ?? '');
         $address = htmlspecialchars($userData['address'] ?? '');
         $phone = htmlspecialchars($userData['phone'] ?? '');
         $avatar = htmlspecialchars($userData['avatar'] ?? '/assets/image/default-avatar.png');
-    
+
         $content = <<<HTML
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        
+
         .profile-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--glass-bg);
             backdrop-filter: blur(15px);
-            bBooking-radius: 25px;
+            border-radius: 25px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            bBooking: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--glass-border);
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .profile-header {
             text-align: center;
             margin-bottom: 1.5rem;
         }
-        
+
         .profile-header h3 {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #d09db0, #667eea);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.5rem;
         }
-        
+
         .avatar-section {
             text-align: center;
             margin-bottom: 1.5rem;
         }
-        
+
         .avatar-preview {
             width: 120px;
             height: 120px;
-            bBooking-radius: 50%;
+            border-radius: 50%;
             object-fit: cover;
-            bBooking: 4px solid rgba(102,126,234,0.2);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             margin-bottom: 1rem;
         }
-        
+
         .avatar-preview:hover {
             transform: scale(1.05);
-            bBooking-color: rgba(102,126,234,0.4);
+            border-color: rgba(102, 126, 234, 0.4);
         }
-        
+
         .avatar-upload-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            bBooking: none;
+            background: var(--primary-gradient);
+            border: none;
             color: white;
             padding: 0.6rem 1.25rem;
-            bBooking-radius: 25px;
+            border-radius: 25px;
             font-weight: 500;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -301,12 +294,12 @@ FORMA;
             font-size: 0.9rem;
             position: relative;
         }
-        
+
         .avatar-upload-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102,126,234,0.3);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
-        
+
         .avatar-upload-btn input {
             position: absolute;
             top: 0;
@@ -316,57 +309,13 @@ FORMA;
             opacity: 0;
             cursor: pointer;
         }
-        
-        .form-input-group {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            bBooking: 2px solid rgba(102,126,234,0.1);
-            bBooking-radius: 15px;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-        
-        .form-input-group:focus-within {
-            bBooking-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.15);
-            transform: translateY(-2px);
-        }
-        
-        .form-input-group .input-icon {
-            padding: 0 1rem;
-            color: #667eea;
-            font-size: 1.1rem;
-            min-width: 50px;
-            text-align: center;
-        }
-        
-        .form-input-group .form-control {
-            bBooking: none;
-            background: transparent;
-            padding: 0.75rem 0;
-            font-size: 1rem;
-            color: #333;
-            width: 100%;
-        }
-        
-        .form-input-group .form-control:focus {
-            box-shadow: none;
-            background: transparent;
-        }
-        
-        .form-input-group .form-control::placeholder {
-            color: #999;
-        }
-        
+
         .btn-save {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            bBooking: none;
+            background: var(--primary-gradient);
+            border: none;
             color: white;
             padding: 0.875rem 2rem;
-            bBooking-radius: 50px;
+            border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
@@ -376,7 +325,7 @@ FORMA;
             margin-top: 0.5rem;
             cursor: pointer;
         }
-        
+
         .btn-save::before {
             content: '';
             position: absolute;
@@ -384,23 +333,24 @@ FORMA;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s;
         }
-        
+
         .btn-save:hover::before {
             left: 100%;
         }
-        
+
         .btn-save:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
-        
+
+        /* Анимация */
         .fade-in-up {
             animation: fadeInUp 0.6s ease;
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -410,11 +360,6 @@ FORMA;
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        /* Фикс для контейнера профиля */
-        .profile-wrapper {
-            padding: 1rem 0;
         }
         </style>
 
@@ -470,14 +415,14 @@ FORMA;
         </div>
 
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const avatarInput = document.getElementById('avatarInput');
             const avatarPreview = document.getElementById('avatarPreview');
             const profileForm = document.getElementById('profileForm');
 
             // Обработка предпросмотра аватарки
             if (avatarInput && avatarPreview) {
-                avatarInput.addEventListener('change', function(event) {
+                avatarInput.addEventListener('change', function (event) {
                     const file = event.target.files[0];
                     if (file) {
                         // Проверяем размер файла (максимум 5MB)
@@ -495,7 +440,7 @@ FORMA;
                         }
 
                         const reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = function (e) {
                             avatarPreview.src = e.target.result;
                         };
                         reader.readAsDataURL(file);
@@ -505,7 +450,7 @@ FORMA;
 
             // Обработка отправки формы
             if (profileForm) {
-                profileForm.addEventListener('submit', function(e) {
+                profileForm.addEventListener('submit', function (e) {
                     const avatarFile = avatarInput.files[0];
                     if (avatarFile) {
                         // Дополнительная проверка перед отправкой
@@ -514,14 +459,14 @@ FORMA;
                             alert('Файл слишком большой. Максимальный размер: 5MB');
                             return;
                         }
-                        
+
                         if (!avatarFile.type.match('image.*')) {
                             e.preventDefault();
                             alert('Пожалуйста, выберите изображение');
                             return;
                         }
                     }
-                    
+
                     // Показываем индикатор загрузки
                     const submitBtn = this.querySelector('button[type="submit"]');
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Сохранение...';
@@ -531,117 +476,120 @@ FORMA;
         });
         </script>
 HTML;
-    
-        $resultTemplate = sprintf($template, $title, $content);
-        return $resultTemplate;
+
+        return sprintf($template, $title, $content);
     }
 
-    public static function getHistoryTemplate(?array $data): string {
+    /**
+     * Страница истории заказов
+     */
+    public static function getHistoryTemplate(?array $data): string
+    {
         $template = parent::getTemplate();
         $title = 'История заказов - Travel Dream';
-    
+
         $content = <<<HTML
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        
+
         .history-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--glass-bg);
             backdrop-filter: blur(15px);
-            bBooking-radius: 25px;
+            border-radius: 25px;
             padding: 2.5rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            bBooking: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--glass-border);
             margin: 1rem auto;
         }
-        
+
         .history-header {
             text-align: center;
             margin-bottom: 2.5rem;
         }
-        
+
         .history-header h2 {
             font-size: 2.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #d09db0, #667eea);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.5rem;
         }
-        
-        .Booking-card {
+
+        .booking-card {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
-            bBooking-radius: 20px;
+            border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 1.25rem;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.08);
-            bBooking: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
-        
-        .Booking-card:hover {
+
+        .booking-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(102,126,234,0.15);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
         }
-        
-        .Booking-header {
+
+        .booking-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
         }
-        
-        .Booking-number {
+
+        .booking-number {
             font-size: 1.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #d09db0, #667eea);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .Booking-status {
+
+        .booking-status {
             padding: 0.4rem 0.8rem;
-            bBooking-radius: 25px;
+            border-radius: 25px;
             font-weight: 600;
             font-size: 0.85rem;
             color: white;
         }
-        
-        .Booking-details {
+
+        .booking-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin-bottom: 1.25rem;
         }
-        
-        .Booking-detail-item {
+
+        .booking-detail-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             color: #666;
             font-size: 0.9rem;
         }
-        
-        .Booking-detail-item i {
-            color: #667eea;
+
+        .booking-detail-item i {
+            color: var(--main-blue);
             width: 16px;
         }
-        
-        .Booking-total {
+
+        .booking-total {
             font-size: 1.1rem;
             font-weight: 700;
             color: #2ecc71;
             text-align: right;
         }
-        
+
         .btn-details {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            bBooking: none;
+            background: var(--primary-gradient);
+            border: none;
             color: white;
             padding: 0.6rem 1.25rem;
-            bBooking-radius: 25px;
+            border-radius: 25px;
             font-weight: 500;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -650,35 +598,36 @@ HTML;
             gap: 0.5rem;
             font-size: 0.9rem;
         }
-        
+
         .btn-details:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102,126,234,0.3);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
             color: white;
         }
-        
+
         .empty-history {
             text-align: center;
             padding: 3rem 2rem;
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
-            bBooking-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .empty-history i {
             font-size: 3.5rem;
-            background: linear-gradient(135deg, #d09db0, #667eea);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1rem;
         }
-        
+
+        /* Анимация */
         .fade-in-up {
             animation: fadeInUp 0.6s ease;
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -689,11 +638,6 @@ HTML;
                 transform: translateY(0);
             }
         }
-
-        /* Фикс для контейнера истории */
-        .history-wrapper {
-            padding: 1rem 0;
-        }
         </style>
 
         <div class="container history-wrapper">
@@ -703,7 +647,7 @@ HTML;
                     <p class="text-muted">Все ваши заказы в одном месте</p>
                 </div>
 HTML;
-    
+
         if (empty($data)) {
             $content .= <<<HTML
                 <div class="empty-history fade-in-up">
@@ -718,14 +662,14 @@ HTML;
         } else {
             $content .= '<div class="row">';
             foreach ($data as $row) {
-                $BookingDate = date("d.m.Y H:i", strtotime($row['created'] ?? $row['created_at'] ?? ''));
+                $bookingDate = date("d.m.Y H:i", strtotime($row['created'] ?? $row['created_at'] ?? ''));
                 $nameStatus = Config::getStatusName($row['status']);
-                
+
                 // Исправление: проверяем разные возможные ключи для адреса
                 $address = htmlspecialchars($row['address'] ?? $row['addres'] ?? 'Адрес не указан');
-                $BookingId = htmlspecialchars($row['id'] ?? '');
+                $bookingId = htmlspecialchars($row['id'] ?? '');
                 $totalSum = htmlspecialchars($row['all_sum'] ?? $row['total_sum'] ?? '0');
-                
+
                 $statusConfig = match ($row['status']) {
                     1 => ['color' => 'linear-gradient(135deg, #f39c12, #e67e22)', 'icon' => 'fa-clock'],
                     2 => ['color' => 'linear-gradient(135deg, #27ae60, #2ecc71)', 'icon' => 'fa-check-circle'],
@@ -733,33 +677,33 @@ HTML;
                     4 => ['color' => 'linear-gradient(135deg, #e74c3c, #c0392b)', 'icon' => 'fa-times-circle'],
                     default => ['color' => 'linear-gradient(135deg, #95a5a6, #7f8c8d)', 'icon' => 'fa-question-circle']
                 };
-    
+
                 $content .= <<<HTML
                 <div class="col-lg-6 mb-3">
-                    <div class="Booking-card fade-in-up">
-                        <div class="Booking-header">
-                            <div class="Booking-number">Заказ #{$BookingId}</div>
-                            <span class="Booking-status" style="background: {$statusConfig['color']}">
+                    <div class="booking-card fade-in-up">
+                        <div class="booking-header">
+                            <div class="booking-number">Заказ #{$bookingId}</div>
+                            <span class="booking-status" style="background: {$statusConfig['color']}">
                                 <i class="fas {$statusConfig['icon']} me-2"></i>{$nameStatus}
                             </span>
                         </div>
                         
-                        <div class="Booking-details">
-                            <div class="Booking-detail-item">
+                        <div class="booking-details">
+                            <div class="booking-detail-item">
                                 <i class="fas fa-calendar"></i>
-                                <span>{$BookingDate}</span>
+                                <span>{$bookingDate}</span>
                             </div>
-                            <div class="Booking-detail-item">
+                            <div class="booking-detail-item">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span>{$address}</span>
                             </div>
                         </div>
                         
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="Booking-total">
+                            <div class="booking-total">
                                 <i class="fas fa-ruble-sign me-1"></i>{$totalSum}
                             </div>
-                            <a href="/Booking/{$BookingId}" class="btn-details">
+                            <a href="/booking/{$bookingId}" class="btn-details">
                                 <i class="fas fa-eye me-2"></i>Подробнее
                             </a>
                         </div>
@@ -769,9 +713,9 @@ HTML;
             }
             $content .= '</div>';
         }
-    
+
         $content .= '</div></div>';
-    
+
         return sprintf($template, $title, $content);
     }
 }
