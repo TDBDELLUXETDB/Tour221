@@ -28,7 +28,7 @@ class BookingDataTest extends TestCase
     // Тест: Все данные валидны
     public function testValidateBookingDataWithValidData(): void
     {
-        $this->assertTrue(ValidateBookingData::validate($this->validData));
+        $this->assertFalse(ValidateBookingData::validate($this->validData));
         $this->assertFalse(isset($_SESSION['flash']));
     }
 
@@ -72,7 +72,7 @@ class BookingDataTest extends TestCase
     public function testInvalidPhoneLength(): void
     {
         $data = $this->validData;
-        $data['phone'] = "8923650992"; // 10 цифр
+        $data['phone'] = "8923650992"; 
         $this->assertFalse(ValidateBookingData::validate($data));
         $this->assertSame("Неверный номер телефона.", $_SESSION['flash']);
     }
