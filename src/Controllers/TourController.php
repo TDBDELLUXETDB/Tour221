@@ -125,7 +125,6 @@ class TourController {
 
         error_log("🔍 Applying filters - from_city: '{$fromCity}', to_city: '{$toCity}', dates: '{$dates}'");
 
-        // Если нет фильтров - возвращаем все данные
         if (empty($fromCity) && empty($toCity) && empty($dates)) {
             return $data;
         }
@@ -133,10 +132,9 @@ class TourController {
         return array_filter($data, function($tour) use ($fromCity, $toCity, $dates) {
             $match = true;
 
-            // Проверка города отправления - используем поле 'name'
             if ($fromCity && isset($tour['name'])) {
                 $tourCity = $tour['name'];
-                // Убираем страну из названия если есть
+           
                 if (strpos($tourCity, ' (') !== false) {
                     $tourCity = explode(' (', $tourCity)[0];
                 }

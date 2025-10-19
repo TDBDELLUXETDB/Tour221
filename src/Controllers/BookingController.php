@@ -425,8 +425,8 @@ class BookingController
     <div class="email-container">
         <div class="email-header">
             <div class="logo">
-                <img src="/assets/image/TT.png" alt="Bubble Pizza" class="logo-icon">
-                BUBBLE PIZZA
+                <img src="/assets/image/TT.png" alt="Travel Dream" class="logo-icon">
+                Travel Dream
             </div>
             <h1 class="Booking-title">Спасибо за ваш заказ!</h1>
             <p class="Booking-number">Номер заказа: <strong>#{$BookingId}</strong></p>
@@ -494,7 +494,7 @@ class BookingController
         </div>
         
         <div class="email-footer">
-            <h3 style="margin: 0 0 20px;">BUBBLE PIZZA</h3>
+            <h3 style="margin: 0 0 20px;">Travel Dream</h3>
             
             <div class="contact-info">
                 <div>📍 г. Кемерово, ул. Тухочевского, 32</div>
@@ -516,7 +516,7 @@ class BookingController
             
             <div style="margin-top: 20px; padding-top: 20px; bBooking-top: 1px solid rgba(255,255,255,0.2);">
                 <p style="margin: 0; font-size: 12px; opacity: 0.8;">
-                    &copy; 2025 «Bubble Pizza» | Все права защищены<br>
+                    &copy; 2025 «Travel Dream» | Все права защищены<br>
                     Разработано студентами группы ИС-221
                 </p>
             </div>
@@ -555,7 +555,7 @@ HTML;
 Если у вас есть вопросы, свяжитесь с нами.
 
 С уважением,
-Команда Bubble Pizza!
+Команда Travel Dream!
 TEXT;
     }
 }

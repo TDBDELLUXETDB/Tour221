@@ -188,7 +188,7 @@ HTML;
                 <h1 class="admin-title">
                     <i class="fas fa-user-shield me-3"></i>
                     Панель управления
-                    <small class="admin-subtitle">Bubble Pizza Administration</small>
+                    <small class="admin-subtitle">Travel Dream Administration</small>
                 </h1>
                 <div class="admin-breadcrumb">
                     <span class="breadcrumb-item active">Главная панель</span>
@@ -286,14 +286,14 @@ HTML;
         // Добавляем JavaScript для админ-панели
         $content .= self::getAdminScripts();
 
-        return sprintf($template, 'Админ-панель - Bubble Pizza', $content);
+        return sprintf($template, 'Админ-панель - Travel Dream', $content);
     }
 
     private static function getAdminStyles(): string
     {
         return <<<HTML
         <style>
-            /* Стили админ-панели в стиле Bubble Pizza */
+            /* Стили админ-панели в стиле Travel Dream */
             .admin-header {
                 background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
                 bBooking-radius: 20px;

@@ -1,8 +1,9 @@
 <?php
 
 namespace Tests;
+
 use PHPUnit\Framework\TestCase;
-use App\Services\ValidateBookingData; // Убедитесь, что это правильный путь к вашему классу
+use App\Services\ValidateBookingData;
 
 class BookingDataTest extends TestCase 
 {
@@ -11,27 +12,23 @@ class BookingDataTest extends TestCase
     public function setUp(): void
     {
         parent::setUp(); // Вызов родительского setUp - хорошая практика
+        session_start(); // Запускаем сессию
+        $_SESSION = [];  // Очищаем сессию перед каждым тестом
+        
         // Определяем базовый набор ВАЛИДНЫХ данных
         $this->validData = [
             'fio' => "Иванов Иван Иванович", // Более полные ФИО
             'address' => "Кемерово, ул. Тухачевского 32, кв 15", // Длиннее 10
             'phone' => "89007009911", // Валидный телефон
             'email' => "ivanov@example.com", // Валидный email
+            'passport' => "1234 567890", // Валидные паспортные данные
         ];
-        
-        // ВАЖНО: Так как ValidateBookingData::validate статический,
-        // нам не нужно создавать экземпляр класса.
-        // $_SESSION также будет очищаться между тестами PHPUnit, 
-        // но лучше не полагаться на $_SESSION в юнит-тестах.
-        // Для чистоты тестов, можно мокать $_SESSION или передавать ее в метод.
-        // Но для этого примера, мы просто уберем создание объекта.
     }
 
     // Тест: Все данные валидны
     public function testValidateBookingDataWithValidData(): void
     {
         $this->assertTrue(ValidateBookingData::validate($this->validData));
-        // Убедимся, что flash-сообщение не установлено при успехе (если это часть логики)
         $this->assertFalse(isset($_SESSION['flash']));
     }
 
@@ -75,7 +72,7 @@ class BookingDataTest extends TestCase
     public function testInvalidPhoneLength(): void
     {
         $data = $this->validData;
-        $data['phone'] = "8900700991"; // 10 цифр
+        $data['phone'] = "8923650992"; // 10 цифр
         $this->assertFalse(ValidateBookingData::validate($data));
         $this->assertSame("Неверный номер телефона.", $_SESSION['flash']);
     }
@@ -116,11 +113,48 @@ class BookingDataTest extends TestCase
         $this->assertSame("Неправильно заполнено поле Емайл.", $_SESSION['flash']);
     }
 
+    // Тест: Паспортные данные отсутствуют
+    public function testPassportMissing(): void
+    {
+        $data = $this->validData;
+        unset($data['passport']);
+        $this->assertFalse(ValidateBookingData::validate($data));
+        $this->assertSame("Незаполнено поле Паспортные данные.", $_SESSION['flash']);
+    }
+
+    // Тест: Паспортные данные слишком короткие
+    public function testPassportTooShort(): void
+    {
+        $data = $this->validData;
+        $data['passport'] = "1234 123"; // 7 цифр вместо 10
+        $this->assertFalse(ValidateBookingData::validate($data));
+        $this->assertSame("Неверный формат паспортных данных.", $_SESSION['flash']);
+    }
+
+    // Тест: Паспортные данные содержат буквы
+    public function testPassportWithLetters(): void
+    {
+        $data = $this->validData;
+        $data['passport'] = "1234 AB1234"; // Содержит буквы
+        $this->assertFalse(ValidateBookingData::validate($data));
+        $this->assertSame("Неверный формат паспортных данных.", $_SESSION['flash']);
+    }
+
+    // Тест: Валидные паспортные данные
+    public function testValidPassport(): void
+    {
+        $data = $this->validData;
+        $data['passport'] = "1234 567890"; // Правильный формат
+        $this->assertTrue(ValidateBookingData::validate($data));
+        $this->assertFalse(isset($_SESSION['flash']));
+    }
+
     public function tearDown(): void
     {
         if (isset($_SESSION['flash'])) {
             unset($_SESSION['flash']); // Очищаем flash-сообщение после каждого теста
         }
+        session_write_close(); // Закрываем сессию
         parent::tearDown();
     }
 }
